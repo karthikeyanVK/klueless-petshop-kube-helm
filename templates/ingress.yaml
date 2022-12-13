@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: petshop-ingress
@@ -9,10 +9,16 @@ spec:
    - http:
       paths: 
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: {{ .Release.Name }}-products-service
-          servicePort: {{ .Values.products.service.port }}
+          service:
+            name: {{ .Release.Name }}-products-service
+            port: 
+              number: {{ .Values.products.service.port }}
       - path: /orders
+        pathType: Prefix
         backend:
-          serviceName: {{ .Release.Name }}-orders-service
-          servicePort: {{ .Values.orders.service.port }}
+          service:
+            name: {{ .Release.Name }}-orders-service
+            port: 
+              number: {{ .Values.orders.service.port }}

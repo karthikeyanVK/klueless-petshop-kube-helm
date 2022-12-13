@@ -5,6 +5,7 @@ apphost: k8s
 products:
   label:
     name: aspnet3core
+    
 
   container:
     name: aspnet3
